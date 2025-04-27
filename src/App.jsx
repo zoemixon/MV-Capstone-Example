@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
-import { MoleculeViewer } from 'molecular-visualization-capstone'; 
-import { FileParser } from 'molecular-visualization-capstone';
-// import { UIPanelsOnly } from 'molecular-visualization-capstone';
-import { UploadButton } from 'molecular-visualization-capstone';
+import { MoleculeViewer, FileParser, UploadButton } from 'molecular-visualization-capstone';
 
 const App = () => {
-    const [file, setFile] = useState(null);
-    const [molecules, setMolecules] = useState([]);
-  
-    return (
-      <div>
-        <UploadButton setFile={setFile} />
-        <FileParser file={file} onParsed={setMolecules} />
-        <MoleculeViewer molecules={molecules} />
-      </div>
-    );
-  };
+  const [file, setFile] = useState(null);
+  const [molecules, setMolecules] = useState([]);
+  const [scene, setScene] = useState(null);
+
+  return (
+    <div>
+      <UploadButton setFile={setFile} />
+      <MoleculeViewer molecules={molecules} onSceneReady={setScene} />
+      <FileParser file={file} onParsed={setMolecules} scene={scene} />
+    </div>
+  );
+};
 
 export default App;
 
