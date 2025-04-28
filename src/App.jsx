@@ -1,29 +1,20 @@
 import React, { useState } from 'react';
-import { MoleculeViewer } from 'molecular-visualization-capstone'; 
-import { FileParser } from 'molecular-visualization-capstone';
-// import { UIPanelsOnly } from 'molecular-visualization-capstone';
-import { UploadButton } from 'molecular-visualization-capstone';
+import { MoleculeViewer, FileParser, UploadButton } from 'molecular-visualization-capstone';
 
 const App = () => {
-  const [files, setFiles] = useState([]);
+  
+  const [file, setFile] = useState(null);
   const [molecules, setMolecules] = useState([]);
-
-  const handleDeleteMolecule = (idx) => {
-    setMolecules(prev => prev.filter((_, i) => i !== idx));
-  };
+  const [scene, setScene] = useState(null);
 
   return (
     <div>
-      <UploadButton setFiles={setFiles} />
-      <FileParser files={files} onParsed={setMolecules} />
-      <MoleculeViewer
-        molecules={molecules}
-        onDeleteMolecule={handleDeleteMolecule}
-      />
+      <UploadButton setFile={setFile} />
+      <MoleculeViewer molecules={molecules} onSceneReady={setScene} />
+      <FileParser file={file} onParsed={setMolecules} scene={scene} />
     </div>
   );
 };
-
 export default App;
 
 {/* <FileUploader onMoleculesAdded={(newMols) => setMolecules(newMols)} />
