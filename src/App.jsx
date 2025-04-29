@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MoleculeViewer, FileParser, UploadButton } from 'molecular-visualization-capstone';
+import { MoleculeViewer, FileParser, UploadButton, DensityCloudControls } from 'molecular-visualization-capstone';
 
 const App = () => {
   const [files, setFiles] = useState([]);
@@ -14,6 +14,7 @@ const App = () => {
     <div>
       <UploadButton setFiles={setFiles} />
       <FileParser files={files} onParsed={setMolecules} scene={scene} />
+      <DensityCloudControls scene={scene} />
       <MoleculeViewer
         molecules={molecules}
         onDeleteMolecule={handleDeleteMolecule}
